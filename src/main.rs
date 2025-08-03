@@ -150,84 +150,40 @@ fn main() {
     // First strategy: complete every order
     let (input_pts, output_pts) = complete_every_order(&orders);
     println!("Complete All Orders:");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Second strategy: complete every order unless MAL exists, then only do MAL(s)
     let (input_pts, output_pts) = complete_every_order_unless_mal(&orders);
     println!("Complete All Orders Unless MAL, then only do MAL(s):");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Third strategy: complete single best order unless MAL exists, then only do MAL(s)
     let (input_pts, output_pts) = complete_best_order_unless_mal(&orders);
     println!("Complete Best Order Unless MAL, then do MAL(s):");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Fourth strategy: complete single best order unless MAL exists, then do all
     let (input_pts, output_pts) = complete_best_order_unless_mal_then_all(&orders);
     println!("Complete Best Order Unless MAL, then do all:");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Fifth strategy: don't to MMM, AAA, or LLL
     let (input_pts, output_pts) = complete_all_but_single_letter(&orders);
     println!("Don't do MMM, AAA, or LLL:");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Sixth strategy: complete best order unless MAL exists, then do all but single letter
     let (input_pts, output_pts) = complete_best_order_unless_mal_then_all_but_single(&orders);
     println!("Do Best Order Unless MAL, then do all but MMM, AAA, or LLL:");
-    println!("\tinput points:\n\t{:?}\n", input_pts);
-    println!("\toutput points:\n\t{:?}\n", output_pts);
-    let ratio_m = output_pts.M as f32 / input_pts.M as f32;
-    let ratio_a = output_pts.A as f32 / input_pts.A as f32;
-    let ratio_l = output_pts.L as f32 / input_pts.L as f32;
-    println!(
-        "\toutput:input:\n\tM: {:?}, A: {:?}, L: {:?}\n",
-        ratio_m, ratio_a, ratio_l
-    );
+    print_stats(input_pts, output_pts);
 
     // Seventh strategy: do all but MMM, AAA, LLL, unles MAL exists, then do all
     let (input_pts, output_pts) = complete_all_but_single_letter_unless_mal_then_all(&orders);
     println!("Don't do MMM, AAA, or LLL, unless MAL exists then do all:");
+    print_stats(input_pts, output_pts);
+}
+
+fn print_stats(input_pts: MixologyPoints, output_pts: MixologyPoints) {
     println!("\tinput points:\n\t{:?}\n", input_pts);
     println!("\toutput points:\n\t{:?}\n", output_pts);
     let ratio_m = output_pts.M as f32 / input_pts.M as f32;
