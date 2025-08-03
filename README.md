@@ -10,6 +10,8 @@ The best strategy that I found was to never do the single paste potions (MMM, AA
 
 Note that I came up with these strategies manually and just wrote functions to test those human invented strategies. This isn't computationally generating strategies to find the overall most optimal one. There could be a slightly more optimal strategy than what I've come up. I do think that what I've come up with is a good strategy and it was based on the knowledge I gained from testing all strategies leading up to this one.
 
+Also note that this doesn't account for any use of digweed. Using digweed only in MAL potions will only increase the points:paste ratio.
+
 ## Raw Output
 ### The results of the script ran at 1,000,000,000 (1 billion) simulated mixology orders are:
 
