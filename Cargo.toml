@@ -1,0 +1,9 @@
+[package]
+name = "osrs-mixology-sim"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+enum-iterator = "2.1.0"
+rand = "0.9.2"
+rand_distr = "0.5.1"
