@@ -1,5 +1,5 @@
 # osrs-mixology-sim
-Simple script simulating different strategies for playing the Mastering Mixology minigame in Old School RuneScape. I made this because I wanted to know roughly what the optimal strategy was for maximizing the amount of points earned per paste input into the minigame.
+Simple script simulating different strategies for playing the Mastering Mixology minigame in Old School RuneScape. I made this because I wanted to know roughly what the optimal strategy was for maximizing the amount of points earned per paste input into the minigame. This script assumes a player with 81 herblore meaning they have access to all potions in the minigame. Information gained from this script can be found on the OSRS wiki [here](https://oldschool.runescape.wiki/w/Mastering_Mixology/Strategies#Prioritise_total_points).
 
 ## Findings
 At a baseline, if you just blindly make every potion in every order, you'll be earning roughly 1.33x points per paste for all 3 of Mox, Aga, and Lye equally.
