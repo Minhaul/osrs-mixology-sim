@@ -11,8 +11,9 @@ The best strategy that I found was to never do the single paste potions (MMM, AA
 Note that I came up with these strategies manually and just wrote functions to test those human invented strategies. This isn't computationally generating strategies to find the overall most optimal one. There could be a slightly more optimal strategy than what I've come up. I do think that what I've come up with is a good strategy and it was based on the knowledge I gained from testing all strategies leading up to this one.
 
 ## Raw Output
-The results of the script ran at 1,000,000,000 (1 billion) simulated mixology orders are:
+### The results of the script ran at 1,000,000,000 (1 billion) simulated mixology orders are:
 
+```
 AAA was found 357160076 times
 MMM was found 357152123 times
 LLL was found 357141713 times
@@ -92,3 +93,4 @@ Don't do MMM, AAA, or LLL, unless MAL exists then do all:
 
         output:input:
         M: 1.3894596, A: 1.4000087, L: 1.3692548
+```
