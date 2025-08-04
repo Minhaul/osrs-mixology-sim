@@ -16,83 +16,103 @@ Also note that this doesn't account for any use of digweed. Using digweed only i
 ### The results of the script ran at 1,000,000,000 (1 billion) simulated mixology orders are:
 
 ```
-AAA was found 357160076 times
-MMM was found 357152123 times
-LLL was found 357141713 times
-AAM was found 285675677 times
-AAL was found 285722227 times
-MMA was found 285714389 times
-MML was found 285707329 times
-LLA was found 285711335 times
-LLM was found 285712562 times
-MAL was found 214302569 times
+AAA was found 357141122 times
+MMM was found 357121837 times
+LLL was found 357133391 times
+AAM was found 285723563 times
+AAL was found 285714934 times
+MMA was found 285717003 times
+MML was found 285720912 times
+LLA was found 285686642 times
+LLM was found 285740558 times
+MAL was found 214300038 times
 Complete All Orders:
         input points:
-        MixologyPoints { M: 29999906130, A: 30000043290, L: 30000050580 }
+        MixologyPoints { M: 30000055000, A: 30000040430, L: 29999904570 }
 
         output points:
-        MixologyPoints { M: 39999974826, A: 40000055508, L: 40000322796 }
+        MixologyPoints { M: 40000571814, A: 40000281426, L: 40000199456 }
 
         output:input:
-        M: 1.3333367, A: 1.3333333, L: 1.3333418
+        M: 1.3333501, A: 1.333341, L: 1.3333442
 
 Complete All Orders Unless MAL, then only do MAL(s):
         input points:
-        MixologyPoints { M: 26162500910, A: 26162125830, L: 26162482240 }
+        MixologyPoints { M: 26162622700, A: 26161998220, L: 26161919200 }
 
         output points:
-        MixologyPoints { M: 33724460690, A: 33723990052, L: 33724593060 }
+        MixologyPoints { M: 33724851262, A: 33723913318, L: 33723859516 }
 
         output:input:
-        M: 1.2890381, A: 1.2890385, L: 1.289044
+        M: 1.2890471, A: 1.289042, L: 1.2890438
 
 Complete Best Order Unless MAL, then do MAL(s):
         input points:
-        MixologyPoints { M: 9944650220, A: 7347295510, L: 13156475310 }
+        MixologyPoints { M: 9944954050, A: 7346994080, L: 13156232670 }
 
         output points:
-        MixologyPoints { M: 12092030534, A: 9595968144, L: 15101437544 }
+        MixologyPoints { M: 12092276270, A: 9595565280, L: 15101118560 }
 
         output:input:
-        M: 1.2159333, A: 1.3060545, L: 1.1478331
+        M: 1.2159208, A: 1.3060532, L: 1.14783
 
 Complete Best Order Unless MAL, then do all:
         input points:
-        MixologyPoints { M: 13782055440, A: 11185212970, L: 16994043650 }
+        MixologyPoints { M: 13782386350, A: 11185036290, L: 16994218040 }
 
         output points:
-        MixologyPoints { M: 18367544670, A: 15872033600, L: 21377167280 }
+        MixologyPoints { M: 18367996822, A: 15871933388, L: 21377458500 }
 
         output:input:
-        M: 1.3327144, A: 1.4190193, L: 1.2579211
+        M: 1.3327152, A: 1.4190328, L: 1.2579254
 
 Don't do MMM, AAA, or LLL:
         input points:
-        MixologyPoints { M: 19639750560, A: 19335772170, L: 20247461550 }
+        MixologyPoints { M: 19640748010, A: 19336407950, L: 20247559950 }
 
         output points:
-        MixologyPoints { M: 27174628750, A: 26971953956, L: 27580086544 }
+        MixologyPoints { M: 27176246120, A: 26973018286, L: 27580459414 }
 
         output:input:
-        M: 1.3836545, A: 1.3949251, L: 1.3621503
+        M: 1.3836665, A: 1.3949343, L: 1.3621621
 
 Do Best Order Unless MAL, then do all but MMM, AAA, or LLL:
         input points:
-        MixologyPoints { M: 12306091740, A: 9708893950, L: 15518052590 }
+        MixologyPoints { M: 12306714010, A: 9708921840, L: 15518213750 }
 
         output points:
-        MixologyPoints { M: 16202741690, A: 13706877564, L: 19212309728 }
+        MixologyPoints { M: 16203561200, A: 13707089084, L: 19212686322 }
 
         output:input:
-        M: 1.316644, A: 1.4117857, L: 1.238062
+        M: 1.3166441, A: 1.4118034, L: 1.2380732
 
 Don't do MMM, AAA, or LLL, unless MAL exists then do all:
         input points:
-        MixologyPoints { M: 21115714260, A: 20812091190, L: 21723452610 }
+        MixologyPoints { M: 21116420350, A: 20812522400, L: 21723564240 }
 
         output points:
-        MixologyPoints { M: 29339431730, A: 29137109992, L: 29744944096 }
+        MixologyPoints { M: 29340681742, A: 29137862590, L: 29745231592 }
 
         output:input:
-        M: 1.3894596, A: 1.4000087, L: 1.3692548
+        M: 1.3894724, A: 1.400016, L: 1.3692611
+
+Complete at most 1 single per order, unless MAL exists then do all:
+        input points:
+        MixologyPoints { M: 26801326630, A: 25039834040, L: 28865983620 }
+
+        output points:
+        MixologyPoints { M: 36191733150, A: 34822760772, L: 37762250772 }
+
+        output:input:
+        M: 1.3503709, A: 1.3906946, L: 1.3081921
+
+Complete at most 1 single per order unless multiple singles, unless MAL exists then do all:
+        input points:
+        MixologyPoints { M: 23302945960, A: 21541611050, L: 25367592870 }
+
+        output points:
+        MixologyPoints { M: 31527231502, A: 30158422732, L: 33097764580 }
+
+        output:input:
+        M: 1.352929, A: 1.4000077, L: 1.3047262
 ```

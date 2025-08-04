@@ -5,7 +5,7 @@ use rand::prelude::*;
 use rand_distr::weighted::WeightedAliasIndex;
 
 // Number of orders to simulate
-const NUM_ORDERS_TO_SIM: usize = 10_000_000;
+const NUM_ORDERS_TO_SIM: usize = 1_000_000_000;
 
 // Potions in order of value based on unique reward prices
 #[allow(clippy::upper_case_acronyms)]
@@ -102,6 +102,18 @@ impl MixologyOrder {
     fn best(&self) -> MixologyPotion {
         max(max(self.first, self.second), self.third)
     }
+
+    fn second_best(&self) -> MixologyPotion {
+        let best = self.best();
+
+        if best == self.first {
+            max(self.second, self.third)
+        } else if best == self.second {
+            max(self.first, self.third)
+        } else {
+            max(self.first, self.second)
+        }
+    }
 }
 
 #[allow(non_snake_case)]
@@ -180,6 +192,16 @@ fn main() {
     // Seventh strategy: do all but MMM, AAA, LLL, unles MAL exists, then do all
     let (input_pts, output_pts) = complete_all_but_single_letter_unless_mal_then_all(&orders);
     println!("Don't do MMM, AAA, or LLL, unless MAL exists then do all:");
+    print_stats(input_pts, output_pts);
+
+    // Eighth strategy: do at most one single per order, unles MAL exists, then do all
+    let (input_pts, output_pts) = complete_at_most_one_single_letter_unless_mal_then_all(&orders);
+    println!("Complete at most 1 single per order, unless MAL exists then do all:");
+    print_stats(input_pts, output_pts);
+
+    // Ninth strategy: do at most one single per order if multiple singles, unles MAL exists, then do all
+    let (input_pts, output_pts) = complete_at_most_one_single_letter_if_mult_unless_mal_then_all(&orders);
+    println!("Complete at most 1 single per order unless multiple singles, unless MAL exists then do all:");
     print_stats(input_pts, output_pts);
 }
 
@@ -497,6 +519,126 @@ fn complete_all_but_single_letter_unless_mal_then_all(
                 input_pts += order.third.input_points();
                 output_pts += order.third.output_points() * mul_factor;
             }
+        }
+    }
+
+    (input_pts, output_pts)
+}
+
+fn complete_at_most_one_single_letter_unless_mal_then_all(
+    orders: &[MixologyOrder],
+) -> (MixologyPoints, MixologyPoints) {
+    let mut input_pts = MixologyPoints::default();
+    let mut output_pts = MixologyPoints::default();
+
+    for order in orders.iter() {
+        if order.contains(MixologyPotion::MAL) {
+            let mul_factor = 1.4;
+
+            input_pts += order.first.input_points();
+            input_pts += order.second.input_points();
+            input_pts += order.third.input_points();
+
+            output_pts += order.first.output_points() * mul_factor;
+            output_pts += order.second.output_points() * mul_factor;
+            output_pts += order.third.output_points() * mul_factor;
+        } else {
+            let num_mmm = order.num(MixologyPotion::MMM);
+            let num_aaa = order.num(MixologyPotion::AAA);
+            let num_lll = order.num(MixologyPotion::LLL);
+            let num_single = num_mmm + num_aaa + num_lll;
+
+            if num_single == 3 {
+                // Just do best and move on
+                let best = order.best();
+                input_pts += best.input_points();
+                output_pts += best.output_points();
+                continue;
+            }
+
+            if num_single == 2 {
+                let best = order.best();
+                let second_best = order.second_best();
+
+                let mul_factor = 1.2;
+
+                input_pts += best.input_points();
+                input_pts += second_best.input_points();
+
+                output_pts += best.output_points() * mul_factor;
+                output_pts += second_best.output_points() * mul_factor;
+                continue;
+            }
+
+            let mul_factor = 1.4 ;
+
+            input_pts += order.first.input_points();
+            input_pts += order.second.input_points();
+            input_pts += order.third.input_points();
+
+            output_pts += order.first.output_points() * mul_factor;
+            output_pts += order.second.output_points() * mul_factor;
+            output_pts += order.third.output_points() * mul_factor;
+        }
+    }
+
+    (input_pts, output_pts)
+}
+
+fn complete_at_most_one_single_letter_if_mult_unless_mal_then_all(
+    orders: &[MixologyOrder],
+) -> (MixologyPoints, MixologyPoints) {
+    let mut input_pts = MixologyPoints::default();
+    let mut output_pts = MixologyPoints::default();
+
+    for order in orders.iter() {
+        if order.contains(MixologyPotion::MAL) {
+            let mul_factor = 1.4;
+
+            input_pts += order.first.input_points();
+            input_pts += order.second.input_points();
+            input_pts += order.third.input_points();
+
+            output_pts += order.first.output_points() * mul_factor;
+            output_pts += order.second.output_points() * mul_factor;
+            output_pts += order.third.output_points() * mul_factor;
+        } else {
+            let num_mmm = order.num(MixologyPotion::MMM);
+            let num_aaa = order.num(MixologyPotion::AAA);
+            let num_lll = order.num(MixologyPotion::LLL);
+            let num_single = num_mmm + num_aaa + num_lll;
+
+            if num_single == 3 {
+                // Just do best and move on
+                let best = order.best();
+                input_pts += best.input_points();
+                output_pts += best.output_points();
+                continue;
+            }
+
+            if num_single == 2 || num_single == 1 {
+                let best = order.best();
+                let second_best = order.second_best();
+
+                let mul_factor = 1.2;
+
+                input_pts += best.input_points();
+                input_pts += second_best.input_points();
+
+                output_pts += best.output_points() * mul_factor;
+                output_pts += second_best.output_points() * mul_factor;
+                continue;
+            }
+
+            let mul_factor = 1.4 ;
+
+            input_pts += order.first.input_points();
+            input_pts += order.second.input_points();
+            input_pts += order.third.input_points();
+
+            output_pts += order.first.output_points() * mul_factor;
+            output_pts += order.second.output_points() * mul_factor;
+            output_pts += order.third.output_points() * mul_factor;
         }
     }
 
